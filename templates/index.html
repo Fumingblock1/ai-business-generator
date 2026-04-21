@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IdeaForge AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <nav>
+    <span class="logo">&#128161; IdeaForge AI</span>
+    <span class="nav-tag">Powered by Gemini AI</span>
+  </nav>
+
+  <section class="hero">
+    <h1>Turn Your Idea Into<br><span class="accent">A Business Plan</span></h1>
+    <p>Type any business idea and AI will generate a full breakdown instantly.</p>
+  </section>
+
+  <section class="main">
+    <div class="container">
+      <div class="input-card">
+        <label for="idea-input">&#128161; Enter your business idea</label>
+        <textarea id="idea-input" placeholder="e.g. A food delivery app just for students in Ann Arbor..." rows="4"></textarea>
+        <button id="generate-btn" onclick="generateIdea()">Generate Business Plan</button>
+      </div>
+
+      <div id="error-box" class="error-box hidden"></div>
+
+      <div id="result-section" class="result-section hidden">
+        <div class="result-header">
+          <h2>&#128200; Your Business Plan</h2>
+          <button class="copy-btn" onclick="copyResult()">&#128203; Copy</button>
+        </div>
+        <div id="result-content" class="result-content"></div>
+        <button class="new-btn" onclick="resetForm()">&#8635; Generate Another</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built by Riaan Engelbrecht &mdash; Flask + Gemini AI &mdash; 2025</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
