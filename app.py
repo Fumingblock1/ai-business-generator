@@ -10,14 +10,6 @@ OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
 def home():
     return render_template("index.html")
 
-@app.route("/debug")
-def debug():
-    key = os.environ.get("OPENROUTER_API_KEY")
-    if key:
-        return f"Key found: {key[:10]}..."
-    else:
-        return "No key found!"
-
 @app.route("/generate", methods=["POST"])
 def generate():
     data = request.get_json()
