@@ -1,10 +1,13 @@
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 from flask import Flask, render_template, request, jsonify
 import requests
-import os
 
 app = Flask(__name__)
 
-OPENROUTER_API_KEY = "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"
+OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
 
 @app.route("/")
 def home():
@@ -43,18 +46,13 @@ Be specific and practical."""
             },
             json={
                 "model": "openrouter/free",
-                "messages": [
-                    {"role": "user", "content": prompt}
-                ]
+                "messages": [{"role": "user", "content": prompt}]
             }
         )
         result = response.json()
         print("API RESPONSE:", result)
         text = result["choices"][0]["message"]["content"]
         return jsonify({"result": text})
-
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
