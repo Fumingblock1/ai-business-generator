@@ -21,6 +21,9 @@ def generate():
     if not idea:
         return jsonify({"error": "Please enter a business idea"}), 400
 
+    if not OPENROUTER_API_KEY:
+        return jsonify({"error": "API key not found on server"}), 500
+
     prompt = f"""You are an expert business consultant. 
 A user has submitted this business idea: "{idea}"
 
@@ -51,6 +54,10 @@ Be specific and practical."""
         )
         result = response.json()
         print("API RESPONSE:", result)
+
+        if "choices" not in result:
+            return jsonify({"error": str(result)}), 500
+
         text = result["choices"][0]["message"]["content"]
         return jsonify({"result": text})
 
